@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackendFormatos.Services
 {
-    [Authorize]
+    //[Authorize]
     public class _BaseService
     {
         protected readonly DbFormatoContext _context = null!;
