@@ -7,7 +7,7 @@ namespace BackendFormatos.Models
         public int Id { get; set; }
 
         [Required]
-        public string? NombreExportador { get; set; }
+        public string? NombreExportadores { get; set; }
 
         [Required]
         public string? Direccion { get; set; }

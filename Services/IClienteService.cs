@@ -6,5 +6,6 @@ namespace BackendFormatos.Services
     public interface IClienteService
     {
         Task<IEnumerable<Clientes>> ObtenerClientesAsync();
+        Task<ClienteDto> GetByIdAsync(int id);
     }
 }

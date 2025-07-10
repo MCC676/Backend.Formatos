@@ -15,8 +15,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // ? REGISTRA tus servicios ANTES de builder.Build()
 builder.Services.AddScoped<IClienteService, ClienteService>();
-// builder.Services.AddScoped<IAgenciaService, AgenciaService>();
-// builder.Services.AddScoped<IExportadorService, ExportadorService>();
+builder.Services.AddScoped<IAgenciaService, AgenciaService>();
+builder.Services.AddScoped<IExportadorService, ExportadorService>();
+builder.Services.AddScoped<IFormatoService, FormatoService>();
 
 builder.Services.AddCors(options =>
 {

@@ -9,22 +9,23 @@ namespace BackendFormatos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : _BaseController
+    public class ExportadoresController : _BaseController
     {
-        private readonly IClienteService _service;
+        private readonly IExportadorService _service;
         private readonly IMapper _mapper;
-        public ClienteController(DbFormatoContext context, IClienteService service, IMapper mapper)
-        : base(context)
+
+        public ExportadoresController(DbFormatoContext context, IExportadorService service, IMapper mapper)
+            : base(context)
         {
             _service = service;
             _mapper = mapper;
         }
 
         [HttpGet("listar")]
-        public async Task<ActionResult<IEnumerable<ClienteDto>>> Listar()
+        public async Task<ActionResult<IEnumerable<ExportadorDto>>> Listar()
         {
-            var clientes = await _service.ObtenerClientesAsync();
-            return Ok(_mapper.Map<List<ClienteDto>>(clientes));
+            var exportadores = await _service.ObtenerExportadoresAsync();
+            return Ok(_mapper.Map<List<ExportadorDto>>(exportadores));
         }
     }
 }
