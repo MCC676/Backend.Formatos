@@ -43,6 +43,12 @@ namespace BackendFormatos.Services
             { "{{ruc}}", cliente.Ruc },
             { "{{nroFactura}}", dto.NroFactura },
             { "{{nombreMina}}", exportador.NombreExportadores },
+            { "{{direccion}}", cliente.DomicilioFiscal },
+            { "{{representante}}", cliente.RepresentanteLegal },
+            { "{{dni}}", cliente.DNIRepresentanteLegal },
+            { "{{departamento}}", cliente.Departamento ?? "" },
+            { "{{provincia}}", cliente.Provincia ?? "" },
+            { "{{distrito}}", cliente.Distrito ?? "" },
         };
 
         foreach (var pair in placeholders)
