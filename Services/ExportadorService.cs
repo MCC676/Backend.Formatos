@@ -30,5 +30,46 @@ namespace BackendFormatos.Services
         {
             return await _context.Exportadores.Where(e => e.Estado == true).ToListAsync();
         }
+        public async Task<ExportadorDto> CrearExportadorAsync(ExportadorDto dto)
+        {
+            var entidad = new Exportadores
+            {
+                NombreExportadores = dto.NombreExportadores,
+                Direccion = dto.Direccion,
+                Ruc = dto.Ruc
+            };
+
+            _context.Exportadores.Add(entidad);
+            await _context.SaveChangesAsync();
+
+            dto.Id = entidad.Id;
+            return dto;
+        }
+        public async Task<ExportadorDto> ActualizarExportadorAsync(int id, ExportadorDto dto)
+        {
+            var entidad = await _context.Exportadores.FindAsync(id);
+            if (entidad == null)
+                throw new KeyNotFoundException("Exportador no encontrado");
+
+            entidad.NombreExportadores = dto.NombreExportadores;
+            entidad.Direccion = dto.Direccion;
+            entidad.Ruc = dto.Ruc;
+            entidad.Estado = dto.estado;
+
+            await _context.SaveChangesAsync();
+
+            return dto;
+        }
+        public async Task<bool> EliminarExportadorAsync(int id)
+        {
+            var entidad = await _context.Exportadores.FindAsync(id);
+            if (entidad == null)
+                return false;
+
+            _context.Exportadores.Remove(entidad);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

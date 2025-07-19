@@ -4,22 +4,17 @@ namespace BackendFormatos.Models.ContentResponse
 {
     public class ClienteDto
     {
-        [Required]
         public int Id { get; set; }
         public string? Nombre { get; set; }
-
         [Required]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "El RUC debe tener 11 caracteres")]
         public string? Ruc { get; set; }
-
         [Required]
         public string? RazonSocial { get; set; }
-
         public string? UsuarioSunat { get; set; }
         public string? ClaveSunat { get; set; }
         public DateTime? FechaInscripcion { get; set; }
         public DateTime? InicioActivacion { get; set; }
-
         [EmailAddress]
         public string? Correo { get; set; }
         public string? ClaveCorreo { get; set; }
@@ -58,4 +53,5 @@ namespace BackendFormatos.Models.ContentResponse
         public string? Observaciones { get; set; }
         public bool Estado { get; set; } = true;
     }
+
 }

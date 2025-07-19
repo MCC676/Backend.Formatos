@@ -13,7 +13,6 @@ namespace BackendFormatos.Services
         {
             _context = context;
         }
-
         public async Task<AgenciaDto> GetByIdAsync(int id)
         {
             var entity = await _context.Agencias.FindAsync(id);
@@ -30,6 +29,31 @@ namespace BackendFormatos.Services
         public async Task<IEnumerable<Agencias>> ObtenerAgenciasAsync()
         {
             return await _context.Agencias.Where(a => a.Estado == true).ToListAsync();
+        }
+        public async Task<AgenciaDto> CrearAgenciaAsync(AgenciaDto dto)
+        {
+            var agencia = new Agencias
+            {
+                NombreAgencias = dto.NombreAgencias,
+                Direccion = dto.Direccion,
+                Ruc = dto.Ruc,
+                Estado = dto.Estado
+            };
+
+            _context.Agencias.Add(agencia);
+            await _context.SaveChangesAsync();
+
+            dto.Id = agencia.Id;
+            return dto;
+        }
+        public Task<AgenciaDto> ActualizarAgenciaAsync(int id, AgenciaDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> EliminarAgenciaAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

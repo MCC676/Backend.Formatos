@@ -3,8 +3,8 @@
     public class GenerarFormatoDto
     {
         public int ClienteId { get; set; }
-        public int ExportadorId { get; set; }
-        public int AgenciaId { get; set; }
+        //public int ExportadorId { get; set; }
+        //public int AgenciaId { get; set; }
 
         public string? Fecha { get; set; }
         public string? FechaExpiracion { get; set; }

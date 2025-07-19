@@ -7,5 +7,8 @@ namespace BackendFormatos.Services
     {
         Task<IEnumerable<Agencias>> ObtenerAgenciasAsync();
         Task<AgenciaDto> GetByIdAsync(int id);
+        Task<AgenciaDto> CrearAgenciaAsync(AgenciaDto dto);
+        Task<AgenciaDto> ActualizarAgenciaAsync(int id, AgenciaDto dto);
+        Task<bool> EliminarAgenciaAsync(int id);
     }
 }

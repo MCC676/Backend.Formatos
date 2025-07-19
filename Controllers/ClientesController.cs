@@ -27,13 +27,13 @@ namespace BackendFormatos.Controllers
             return Ok(_mapper.Map<List<ClienteDto>>(clientes));
         }
 
-        [HttpPost]
+        [HttpPost("guardarCliente")]
         public async Task<ActionResult<ClienteDto>> CrearCliente(ClienteDto clienteDto)
         {
             try
             {
                 var clienteCreado = await _service.CrearCliente(clienteDto);
-                return CreatedAtAction(nameof(_service.GetByIdAsync), new { id = clienteCreado.Id }, clienteCreado);
+                return Ok(clienteCreado);
             }
             catch (BadHttpRequestException ex)
             {

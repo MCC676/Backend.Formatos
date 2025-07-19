@@ -27,8 +27,8 @@ namespace BackendFormatos.Services
     public async Task<byte[]> GenerarDocumentoWordAsync(GenerarFormatoDto dto)
     {
         var cliente = await _clienteService.GetByIdAsync(dto.ClienteId);
-        var exportador = await _exportadorService.GetByIdAsync(dto.ExportadorId);
-        var agencia = await _agenciaService.GetByIdAsync(dto.AgenciaId);
+        //var exportador = await _exportadorService.GetByIdAsync(dto.ExportadorId);
+        //var agencia = await _agenciaService.GetByIdAsync(dto.AgenciaId);
 
         var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "Formato1.docx");
         var outputPath = Path.Combine(Path.GetTempPath(), $"formato-{Guid.NewGuid()}.docx");
@@ -42,7 +42,7 @@ namespace BackendFormatos.Services
             { "{{cliente}}", cliente.Nombre },
             { "{{ruc}}", cliente.Ruc },
             { "{{nroFactura}}", dto.NroFactura },
-            { "{{nombreMina}}", exportador.NombreExportadores },
+            //{ "{{nombreMina}}", exportador.NombreExportadores },
             { "{{direccion}}", cliente.DomicilioFiscal },
             { "{{representante}}", cliente.RepresentanteLegal },
             { "{{dni}}", cliente.DNIRepresentanteLegal },
