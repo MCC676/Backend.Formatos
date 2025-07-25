@@ -1,5 +1,6 @@
 using BackendFormatos.Data;
 using BackendFormatos.Services;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,12 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContext<DbFormatoContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("ProveedorFormato")));
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
+});
+
 
 // ? Ahora puedes construir la aplicación
 var app = builder.Build();

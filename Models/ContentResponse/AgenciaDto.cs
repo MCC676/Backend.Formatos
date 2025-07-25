@@ -18,4 +18,13 @@ namespace BackendFormatos.Models.ContentResponse
 
         public bool Estado { get; set; } = true;
     }
+
+    public class AgenciaFormatoDto
+    {
+        public int Id { get; set; }
+        public string? NombreArchivo { get; set; }
+        public string? RutaArchivo { get; set; }
+        public DateTime FechaRegistro { get; set; }
+    }
+
 }

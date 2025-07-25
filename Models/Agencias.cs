@@ -16,5 +16,6 @@ namespace BackendFormatos.Models
         public string? Ruc { get; set; }
 
         public bool Estado { get; set; }
+        public ICollection<AgenciaFormatos>? Formatos { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace BackendFormatos.Services
         Task<IEnumerable<Clientes>> ObtenerClientesAsync();
         Task<ClienteDto> GetByIdAsync(int id);
         Task<ClienteDto> CrearCliente(ClienteDto cliente);
+        Task<ClienteDto> ActualizarClienteAsync(int id, ClienteDto dto);
+        Task<bool> EliminarClienteAsync(int id);
     }
 }

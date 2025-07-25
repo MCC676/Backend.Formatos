@@ -35,7 +35,7 @@ namespace BackendFormatos.Controllers
             return Ok(creado);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Editar/{id}")]
         public async Task<ActionResult<ExportadorDto>> Actualizar(int id, ExportadorDto dto)
         {
             try
@@ -49,7 +49,7 @@ namespace BackendFormatos.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Eliminar/{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
             var eliminado = await _service.EliminarExportadorAsync(id);

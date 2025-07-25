@@ -10,6 +10,7 @@ namespace BackendFormatos.Data
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Exportadores> Exportadores { get; set; }
         public DbSet<Agencias> Agencias { get; set; }
+        public DbSet<AgenciaFormatos> AgenciaFormatos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,6 +19,7 @@ namespace BackendFormatos.Data
             modelBuilder.Entity<Clientes>().ToTable("Clientes");
             modelBuilder.Entity<Exportadores>().ToTable("Exportadores");
             modelBuilder.Entity<Agencias>().ToTable("Agencias");
+            modelBuilder.Entity<AgenciaFormatos>().ToTable("AgenciaFormatos");
             #endregion
 
             #region Store Procedure Query Select

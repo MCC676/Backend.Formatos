@@ -45,5 +45,32 @@ namespace BackendFormatos.Controllers
                 return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud" });
             }
         }
+
+        [HttpPut("editarCliente/{id}")]
+        public async Task<IActionResult> Actualizar(int id, ClienteDto dto)
+        {
+            try
+            {
+                var cliente = await _service.ActualizarClienteAsync(id, dto);
+                return Ok(cliente);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error interno del servidor", detalle = ex.Message });
+            }
+        }
+        [HttpDelete("Eliminar/{id}")]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            var eliminado = await _service.EliminarClienteAsync(id);
+            if (!eliminado)
+                return NotFound();
+
+            return NoContent();
+        }
     }
 }

@@ -27,18 +27,66 @@ namespace BackendFormatos.Controllers
             var agencias = await _service.ObtenerAgenciasAsync();
             return Ok(_mapper.Map<List<AgenciaDto>>(agencias));
         }
-        [HttpPost("guardarAgencia")]
-        public async Task<ActionResult<AgenciaDto>> CrearAgencia(AgenciaDto dto)
+        [HttpPost("guardarAgenciaConArchivos")]
+        public async Task<IActionResult> GuardarAgenciaConArchivos([FromForm] AgenciaDto dto, [FromForm] List<IFormFile> archivos)
         {
             try
             {
-                var creada = await _service.CrearAgenciaAsync(dto);
-                return Ok(creada); // o usar CreatedAtAction si ya tienes GetById
+                if (dto == null)
+                    return BadRequest("La información de la agencia es requerida.");
+
+                // Puedes validar si el RUC es nulo o inválido
+                if (string.IsNullOrWhiteSpace(dto.Ruc))
+                    return BadRequest("El RUC de la agencia es obligatorio.");
+
+                var creada = await _service.CrearAgenciaConArchivosAsync(dto, archivos);
+                return Ok(creada);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al crear la agencia", detalle = ex.Message });
+                // Aquí podrías loguear con ILogger si lo tienes configurado
+                return StatusCode(500, new { mensaje = "Error al guardar la agencia", detalle = ex.Message });
             }
         }
+
+
+        [HttpPut("Editar/{id}")]
+        public async Task<ActionResult<AgenciaDto>> Actualizar(int id, AgenciaDto dto)
+        {
+            try
+            {
+                var actualizado = await _service.ActualizarAgenciaAsync(id, dto);
+                return Ok(actualizado);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("Eliminar/{id}")]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            var eliminado = await _service.EliminarAgenciaAsync(id);
+            if (!eliminado)
+                return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpGet("{agenciaId}/formatos")]
+        public async Task<IActionResult> ObtenerFormatosPorAgencia(int agenciaId)
+        {
+            try
+            {
+                var formatos = await _service.ObtenerFormatosPorAgenciaAsync(agenciaId);
+                return Ok(formatos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error al obtener los formatos", detalle = ex.Message });
+            }
+        }
+
     }
 }
