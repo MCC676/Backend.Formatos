@@ -10,7 +10,12 @@ namespace BackendFormatos.Data
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Exportadores> Exportadores { get; set; }
         public DbSet<Agencias> Agencias { get; set; }
+        public DbSet<DocumentoTransportista> DocumentoTransportistas { get; set; }
+        public DbSet<DocumentoCargaExportar> DocumentoCargaExportar { get; set; }
+        public DbSet<DocumentoParte> DocumentoParte { get; set; }
         public DbSet<AgenciaFormatos> AgenciaFormatos { get; set; }
+        public DbSet<FormatoGenerado> FormatosGenerados => Set<FormatoGenerado>();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +25,10 @@ namespace BackendFormatos.Data
             modelBuilder.Entity<Exportadores>().ToTable("Exportadores");
             modelBuilder.Entity<Agencias>().ToTable("Agencias");
             modelBuilder.Entity<AgenciaFormatos>().ToTable("AgenciaFormatos");
+            modelBuilder.Entity<FormatoGenerado>().ToTable("FormatoGenerado");
+            modelBuilder.Entity<DocumentoParte>().ToTable("DocumentoParte");
+            modelBuilder.Entity<DocumentoTransportista>().ToTable("DocumentoTransportista");
+            modelBuilder.Entity<DocumentoCargaExportar>().ToTable("DocumentoCargaExportar");
             #endregion
 
             #region Store Procedure Query Select

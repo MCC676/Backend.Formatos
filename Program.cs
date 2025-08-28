@@ -3,6 +3,8 @@ using BackendFormatos.Services;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting.WindowsServices;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,14 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IAgenciaService, AgenciaService>();
 builder.Services.AddScoped<IExportadorService, ExportadorService>();
 builder.Services.AddScoped<IFormatoService, FormatoService>();
+builder.Services.AddScoped<IDocumentoParte, DocumentoParteService>();
+
+
+builder.Host.UseWindowsService(options =>
+{
+    options.ServiceName = "BackendFormatos";
+});
+
 
 builder.Services.AddCors(options =>
 {
@@ -54,6 +64,10 @@ app.UseCors(AllowSpecificOrigins);
 
 app.UseAuthorization();
 
+app.UseDefaultFiles();   // sirve index.html por defecto desde wwwroot
+app.UseStaticFiles();
+
 app.MapControllers();
+app.MapFallbackToFile("index.html"); // SPA Angular
 
 app.Run();

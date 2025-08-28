@@ -29,7 +29,16 @@ namespace BackendFormatos.Services
                 DomicilioFiscal = entity.DomicilioFiscal,
                 Departamento = entity.Departamento,
                 Provincia = entity.Provincia,
-                Distrito = entity.Distrito
+                Distrito = entity.Distrito,
+                NroRecpo = entity.NroRecpo,
+                CodigoUnico = entity.CodigoUnico,
+                NroPartida = entity.NroPartida,
+                NroAsiento = entity.NroAsiento,
+                AWB = entity.AWB,
+                SedeProductiva = entity.SedeProductiva,
+                NegocioDescripcion = entity.NegocioDescripcion,
+                BeneficiariosFinales = entity.BeneficiariosFinales,
+                CelularContacto = entity.CelularContacto,
             };
         }
 
@@ -111,6 +120,8 @@ namespace BackendFormatos.Services
             entidad.CodigoSwit = dto.CodigoSwit;
             entidad.Observaciones = dto.Observaciones;
             entidad.Estado = dto.Estado;
+            entidad.NroAsiento = dto.NroAsiento;
+            entidad.NroPartida = dto.NroPartida;
 
             await _context.SaveChangesAsync();
 

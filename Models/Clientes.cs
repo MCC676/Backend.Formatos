@@ -56,5 +56,11 @@ namespace BackendFormatos.Models
         public string? CodigoSwit { get; set; }
         public string? Observaciones { get; set; }
         public bool Estado { get; set; }
+        public string? NroPartida { get; set; }
+        public string? NroAsiento { get; set; }
+        public string? AWB { get; set; }
+        public string? SedeProductiva { get; set; }
+        public string? NegocioDescripcion { get; set; }
+        public string? BeneficiariosFinales { get; set; }
     }
 }

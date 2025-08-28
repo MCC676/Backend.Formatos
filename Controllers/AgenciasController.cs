@@ -50,28 +50,36 @@ namespace BackendFormatos.Controllers
         }
 
 
-        [HttpPut("Editar/{id}")]
-        public async Task<ActionResult<AgenciaDto>> Actualizar(int id, AgenciaDto dto)
+        [HttpPut("actualizarAgencia/{id}")]
+        public async Task<IActionResult> ActualizarAgenciaConArchivos(int id, [FromBody] AgenciaDto dto)
         {
             try
             {
-                var actualizado = await _service.ActualizarAgenciaAsync(id, dto);
-                return Ok(actualizado);
+                if (dto == null)
+                    return BadRequest("La información es requerida.");
+
+                var actualizada = await _service.ActualizarAgenciaConArchivosAsync(id, dto);
+                return Ok(actualizada);
             }
-            catch (KeyNotFoundException)
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode(500, new { mensaje = "Error al actualizar la agencia", detalle = ex.Message });
             }
         }
 
-        [HttpDelete("Eliminar/{id}")]
-        public async Task<IActionResult> Eliminar(int id)
-        {
-            var eliminado = await _service.EliminarAgenciaAsync(id);
-            if (!eliminado)
-                return NotFound();
 
-            return NoContent();
+        [HttpDelete("eliminarAgencia/{id}")]
+        public async Task<IActionResult> EliminarAgencia(int id)
+        {
+            try
+            {
+                await _service.EliminarAgenciaAsync(id);
+                return Ok(new { mensaje = "Agencia eliminada correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error al eliminar agencia", detalle = ex.Message });
+            }
         }
 
         [HttpGet("{agenciaId}/formatos")]
@@ -85,6 +93,34 @@ namespace BackendFormatos.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { mensaje = "Error al obtener los formatos", detalle = ex.Message });
+            }
+        }
+
+        [HttpDelete("eliminarFormato/{id}")]
+        public async Task<IActionResult> EliminarFormato(int id)
+        {
+            try
+            {
+                await _service.EliminarFormatoAsync(id);
+                return Ok(new { mensaje = "Formato eliminado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error al eliminar formato", detalle = ex.Message });
+            }
+        }
+
+        [HttpPost("agregarArchivos/{id}")]
+        public async Task<IActionResult> AgregarArchivos(int id, [FromForm] List<IFormFile> archivos)
+        {
+            try
+            {
+                await _service.AgregarArchivosAgenciaAsync(id, archivos);
+                return Ok(new { mensaje = "Archivos agregados correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Error al subir archivos", detalle = ex.Message });
             }
         }
 

@@ -16,6 +16,9 @@ namespace BackendFormatos.Mappings
 
             CreateMap<Exportadores, ExportadorDto>();
             CreateMap<ExportadorDto, Exportadores>();
+
+            CreateMap<DocumentoParte, DocumentoParteDto>();
+            CreateMap<DocumentoParteDto, DocumentoParte>();
         }
     }
 }
