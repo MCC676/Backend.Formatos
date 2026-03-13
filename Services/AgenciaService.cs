@@ -63,7 +63,8 @@ namespace BackendFormatos.Services
                 NombreAgencias = dto.NombreAgencias,
                 Direccion = dto.Direccion,
                 Ruc = dto.Ruc,
-                Estado = dto.Estado
+                //Estado = dto.Estado
+                Estado = true
             };
 
             _context.Agencias.Add(agencia);

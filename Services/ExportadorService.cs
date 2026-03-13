@@ -36,13 +36,22 @@ namespace BackendFormatos.Services
             {
                 NombreExportadores = dto.NombreExportadores,
                 Direccion = dto.Direccion,
-                Ruc = dto.Ruc
+                Ruc = dto.Ruc,
+                //Estado = dto.estado
+                Tipo = dto.Tipo!,
+                Ciudad = dto.Ciudad,
+                Pais = dto.Pais,
+                Telefono = dto.Telefono,
+                Correo = dto.Correo,
+                Contacto = dto.Contacto,
+                Estado = true
             };
 
             _context.Exportadores.Add(entidad);
             await _context.SaveChangesAsync();
 
             dto.Id = entidad.Id;
+            dto.Tipo = entidad.Tipo.ToString();
             return dto;
         }
         public async Task<ExportadorDto> ActualizarExportadorAsync(int id, ExportadorDto dto)
@@ -55,11 +64,19 @@ namespace BackendFormatos.Services
             entidad.Direccion = dto.Direccion;
             entidad.Ruc = dto.Ruc;
             entidad.Estado = dto.estado;
+            entidad.Ciudad = dto.Ciudad;
+            entidad.Pais = dto.Pais;
+            entidad.Telefono = dto.Telefono;
+            entidad.Correo = dto.Correo;
+            entidad.Contacto = dto.Contacto;
+            entidad.Tipo = dto.Tipo!; // NUEVO
 
             await _context.SaveChangesAsync();
 
+            dto.Tipo = entidad.Tipo.ToString();
             return dto;
         }
+
         public async Task<bool> EliminarExportadorAsync(int id)
         {
             var entidad = await _context.Exportadores.FindAsync(id);
@@ -71,5 +88,17 @@ namespace BackendFormatos.Services
 
             return true;
         }
+
+        private static ExportadorTipo ParseTipo(string? tipo)
+        {
+            if (string.IsNullOrWhiteSpace(tipo))
+                throw new ArgumentException("El campo Tipo es obligatorio. Valores: ShipTo | BuyerNotify");
+
+            if (Enum.TryParse<ExportadorTipo>(tipo.Trim(), ignoreCase: true, out var parsed))
+                return parsed;
+
+            throw new ArgumentException("Tipo inválido. Valores permitidos: ShipTo | BuyerNotify");
+        }
+
     }
 }

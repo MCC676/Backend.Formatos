@@ -23,6 +23,7 @@ builder.Services.AddScoped<IExportadorService, ExportadorService>();
 builder.Services.AddScoped<IFormatoService, FormatoService>();
 builder.Services.AddScoped<IDocumentoParte, DocumentoParteService>();
 
+builder.Services.AddScoped<IProveedorService, ProveedorService>();
 
 builder.Host.UseWindowsService(options =>
 {
@@ -58,7 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors(AllowSpecificOrigins);
 

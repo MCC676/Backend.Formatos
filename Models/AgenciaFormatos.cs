@@ -11,6 +11,17 @@
         public Agencias? Agencia { get; set; }
     }
 
+    public class ProveedorFormatos
+    {
+        public int Id { get; set; }
+        public int ProveedorId { get; set; }
+        public string? NombreArchivo { get; set; }
+        public string? RutaArchivo { get; set; }
+        public DateTime FechaRegistro { get; set; }
+
+        public Proveedor? Proveedor { get; set; }
+    }
+
     public class FormatoGenerado
     {
         public int Id { get; set; }

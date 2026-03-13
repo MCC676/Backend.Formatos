@@ -15,7 +15,6 @@ namespace BackendFormatos.Models.ContentResponse
         public string? ClaveSunat { get; set; }
         public DateTime? FechaInscripcion { get; set; }
         public DateTime? InicioActivacion { get; set; }
-        [EmailAddress]
         public string? Correo { get; set; }
         public string? ClaveCorreo { get; set; }
         public string? RepresentanteLegal { get; set; }
@@ -58,6 +57,10 @@ namespace BackendFormatos.Models.ContentResponse
         public string? SedeProductiva { get; set; }
         public string? NegocioDescripcion { get; set; }
         public string? BeneficiariosFinales { get; set; }
+        // ✅ Nuevo: Ubigeo del Domicilio Fiscal
+        public string? DomicilioFiscalDepartamento { get; set; }
+        public string? DomicilioFiscalProvincia { get; set; }
+        public string? DomicilioFiscalDistrito { get; set; }
     }
 
 }

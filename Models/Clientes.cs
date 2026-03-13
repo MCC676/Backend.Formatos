@@ -62,5 +62,9 @@ namespace BackendFormatos.Models
         public string? SedeProductiva { get; set; }
         public string? NegocioDescripcion { get; set; }
         public string? BeneficiariosFinales { get; set; }
+        public string? DomicilioFiscalDepartamento { get; set; }
+        public string? DomicilioFiscalProvincia { get; set; }
+        public string? DomicilioFiscalDistrito { get; set; }
+
     }
 }

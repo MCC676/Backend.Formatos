@@ -39,6 +39,10 @@ namespace BackendFormatos.Services
                 NegocioDescripcion = entity.NegocioDescripcion,
                 BeneficiariosFinales = entity.BeneficiariosFinales,
                 CelularContacto = entity.CelularContacto,
+                Correo = entity.Correo,
+                NroCuentaCorriente = entity.NroCuentaCorriente,
+                Banco = entity.Banco,
+                CodigoSwit = entity.CodigoSwit
             };
         }
 

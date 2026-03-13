@@ -60,6 +60,13 @@
         public string? NumeroTarjetaPropiedad { get; set; }
         public TimeSpan? HoraIngresoDepositoTemporal { get; set; }
         public DateTime? FechaIngresoDepositoTemporal { get; set; }
+        // Datos de mineral
+        public string? pesoBrutoOroDore { get; set; }
+        public string? purezaPlata { get; set; }
+        public string? purezaOroDore { get; set; }
+        public string? rateOnzOro { get; set; }
+        public string? rateOnzPlata { get; set; }
+        public string? rateOnzCobre { get; set; }
 
     }
     public class FormatoGeneradoDto

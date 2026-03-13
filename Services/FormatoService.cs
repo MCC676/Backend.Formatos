@@ -89,6 +89,12 @@ namespace BackendFormatos.Services
                 ["{{NegocioDescripcion}}"] = cliente.NegocioDescripcion,
                 ["{{BeneficiariosFinales}}"] = cliente.BeneficiariosFinales,
                 ["{{CelularContacto}}"] = cliente.CelularContacto,
+                ["{{Correo}}"] = cliente.Correo,
+                ["{{NroCuentaCorriente}}"] = cliente.NroCuentaCorriente,
+                ["{{Banco}}"] = cliente.Banco,
+                ["{{CodigoSwit}}"] = cliente.CodigoSwit,
+                //Importador
+                ["{{RazonSocial}}"] = docParte.RazonSocial,
                 //Datos documento parte
                 ["{{NombresApellidos}}"] = docParte.NombresApellidos,
                 ["{{Direccion}}"] = docParte.Direccion,
@@ -123,6 +129,13 @@ namespace BackendFormatos.Services
                 ["{{TransportistaBrevete}}"] = dto.NumeroBrevete,
                 ["{{TransportistaTarjetaPropiedad}}"] = dto.NumeroTarjetaPropiedad,
                 ["{{HoraIngresoDepositoTemporal}}"] = dto.HoraIngresoDepositoTemporal?.ToString(@"hh\:mm") ?? "",
+                // Datos del mineral
+                ["{{pesoBrutoOroDore}}"] = dto.pesoBrutoOroDore,
+                ["{{purezaPlata}}"] = dto.purezaPlata,
+                ["{{purezaOroDore}}"] = dto.purezaOroDore,
+                ["{{rateOnzOro}}"] = dto.rateOnzOro,
+                ["{{rateOnzPlata}}"] = dto.rateOnzPlata,
+                ["{{rateOnzCobre}}"] = dto.rateOnzCobre
             };
 
             // (Opcional) Mapa "tipado" para que ciertas celdas queden como número/fecha si la celda contiene SOLO ese placeholder
@@ -316,7 +329,8 @@ namespace BackendFormatos.Services
                 ["{{CodigoUnico}}"] = cliente.CodigoUnico,
                 ["{{NroPartida}}"] = cliente.NroPartida,
                 ["{{NroAsiento}}"] = cliente.NroAsiento,
-                ["{{AWB}}"] = dto.AWB
+                ["{{AWB}}"] = dto.AWB,
+                ["{{SedeProductiva}}"] = cliente.SedeProductiva,
             };
             foreach (var (ph, val) in map) doc.ReplaceText(ph, val ?? "");
 
