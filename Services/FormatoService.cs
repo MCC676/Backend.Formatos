@@ -48,8 +48,11 @@ namespace BackendFormatos.Services
 
             // 2) Datos del cliente y formateo de fecha
             var cliente = await _clienteService.GetByIdAsync(dto.ClienteId);
+            var exportador = await _exportadorService.GetByIdAsync(dto.ExportadorId);
             // 4) Datos del documento parte
             var docParte = await _documentoParte.GetByIdAsync(dto.DocumentoParteId);
+            var docParteConsigne = await _documentoParte.GetByIdAsync(dto.DocumentoParteConsigneId);
+            var docParteBuyer = await _documentoParte.GetByIdAsync(dto.DocumentoParteBuyerId);
 
             // 5) formateo de fecha
             var culturaEsPe = new CultureInfo("es-PE");
@@ -59,6 +62,11 @@ namespace BackendFormatos.Services
             {
                 fechaActa = DateTime.Today;
             }
+            if (docParteConsigne == null || docParteConsigne.Rol?.Trim().ToUpper() != "CONSIGNEE")
+                throw new Exception("El registro seleccionado para CONSIGNEE no es válido.");
+
+            if (docParteBuyer == null || docParteBuyer.Rol?.Trim().ToUpper() != "NOTIFY")
+                throw new Exception("El registro seleccionado para BUYER/NOTIFY no es válido.");
 
             var fechaLarga = fechaActa.ToString("d 'de' MMMM 'del' yyyy", culturaEsPe); // 18 de julio del 2025
             var ciudad = string.IsNullOrWhiteSpace(dto.Departamento) ? "Lima" : dto.Departamento.Trim();
@@ -93,15 +101,35 @@ namespace BackendFormatos.Services
                 ["{{NroCuentaCorriente}}"] = cliente.NroCuentaCorriente,
                 ["{{Banco}}"] = cliente.Banco,
                 ["{{CodigoSwit}}"] = cliente.CodigoSwit,
-                //Importador
-                ["{{RazonSocial}}"] = docParte.RazonSocial,
-                //Datos documento parte
-                ["{{NombresApellidos}}"] = docParte.NombresApellidos,
-                ["{{Direccion}}"] = docParte.Direccion,
-                ["{{Celular}}"] = docParte.Celular,
-                ["{{Email}}"] = docParte.Email,
-                ["{{Contacto}}"] = docParte.Contacto,
-                ["{{ZipCode}}"] = docParte.ZipCode,
+                //EXPORTADOR
+                ["{{razonSocialExp}}"] = exportador.NombreExportadores,
+                ["{{rucExp}}"] = exportador.Ruc,
+                ["{{direccionExp}}"] = exportador.Direccion,
+                // CONSIGNEE
+                ["{{ConsigneRazonSocial}}"] = docParteConsigne?.RazonSocial ?? "",
+                ["{{ConsigneDireccion1}}"] = docParteConsigne?.Direccion ?? "",
+                ["{{ConsigneUbicacion}}"] = $"{docParteConsigne?.Ciudad}, {docParteConsigne?.EstadoProvincia}, {docParteConsigne?.ZipCode}-{docParteConsigne?.Pais}",
+                ["{{ConsigneContacto}}"] = docParteConsigne?.Contacto ?? "",
+                ["{{ConsigneCelular}}"] = docParteConsigne?.Celular ?? "",
+                ["{{ConsigneCorreo}}"] = docParteConsigne?.Email ?? "",
+                ["{{ConsigneZipCode}}"] = docParteConsigne?.ZipCode ?? "",
+                // BUYER
+                ["{{BuyerRazonSocial}}"] = docParteBuyer?.RazonSocial ?? "",
+                ["{{BuyerDireccion1}}"] = docParteBuyer?.Direccion ?? "",
+                ["{{BuyerUbicacion}}"] = $"{docParteBuyer?.Ciudad}, {docParteBuyer?.EstadoProvincia}, {docParteBuyer?.ZipCode}-{docParteBuyer?.Pais}",
+                ["{{BuyerContacto}}"] = docParteBuyer?.Contacto ?? "",
+                ["{{BuyerCelular}}"] = docParteBuyer?.Celular ?? "",
+                ["{{BuyerCorreo}}"] = docParteBuyer?.Email ?? "",
+                ["{{BuyerZipCode}}"] = docParteBuyer?.ZipCode ?? "",
+
+
+                //["{{RazonSocial}}"] = docParte.RazonSocial,
+                //["{{NombresApellidos}}"] = docParte.NombresApellidos,
+                //["{{Direccion}}"] = docParte.Direccion,
+                //["{{Celular}}"] = docParte.Celular,
+                //["{{Email}}"] = docParte.Email,
+                //["{{Contacto}}"] = docParte.Contacto,
+                //["{{ZipCode}}"] = docParte.ZipCode,
                 //Datos de la carga a exportar - F
                 ["{{DescripcionProducto}}"] = dto.DescripcionProducto,
                 ["{{NumeroBultos}}"] = dto.NumeroBultos?.ToString(esPE) ?? "",

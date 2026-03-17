@@ -23,6 +23,8 @@ namespace BackendFormatos.Services
         {
             Id = entity.Id,
             NombreExportadores = entity.NombreExportadores,
+            Direccion = entity.Direccion,
+            Ruc = entity.Ruc,
         };
         }
 

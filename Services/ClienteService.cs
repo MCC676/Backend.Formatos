@@ -126,6 +126,11 @@ namespace BackendFormatos.Services
             entidad.Estado = dto.Estado;
             entidad.NroAsiento = dto.NroAsiento;
             entidad.NroPartida = dto.NroPartida;
+            //UBIGEO
+            entidad.DomicilioFiscalDepartamento = dto.DomicilioFiscalDepartamento;
+            entidad.DomicilioFiscalProvincia = dto.DomicilioFiscalProvincia;
+            entidad.DomicilioFiscalDistrito = dto.DomicilioFiscalDistrito;
+
 
             await _context.SaveChangesAsync();
 

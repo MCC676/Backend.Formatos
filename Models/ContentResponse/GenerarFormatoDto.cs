@@ -4,9 +4,11 @@
     {
         public int FormatoId { get; set; }   // 🔸 NUEVO
         public int ClienteId { get; set; }
-        //public int ExportadorId { get; set; }
+        public int ExportadorId { get; set; }
         public int AgenciaId { get; set; }
         public int DocumentoParteId { get; set; }
+        public int DocumentoParteConsigneId { get; set; }
+        public int DocumentoParteBuyerId { get; set; }
         public string? Fecha { get; set; }
         public string? FechaExpiracion { get; set; }
         public string? NroFactura { get; set; }
