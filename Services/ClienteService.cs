@@ -117,7 +117,6 @@ namespace BackendFormatos.Services
             entidad.Distrito = dto.Distrito;
             entidad.CodigoUnico = dto.CodigoUnico;
             entidad.CantidadConcesiones = dto.CantidadConcesiones;
-            entidad.DeusaConcesionesDolares = dto.DeusaConcesionesDolares;
             entidad.Banco = dto.Banco;
             entidad.NroCuentaCorriente = dto.NroCuentaCorriente;
             entidad.CCI = dto.CCI;
@@ -130,7 +129,12 @@ namespace BackendFormatos.Services
             entidad.DomicilioFiscalDepartamento = dto.DomicilioFiscalDepartamento;
             entidad.DomicilioFiscalProvincia = dto.DomicilioFiscalProvincia;
             entidad.DomicilioFiscalDistrito = dto.DomicilioFiscalDistrito;
-
+            //DATOS QUE NO GUARDABAN
+            entidad.NegocioDescripcion = dto.NegocioDescripcion;
+            entidad.BeneficiariosFinales = dto.BeneficiariosFinales;
+            entidad.SedeProductiva = dto.SedeProductiva;
+            entidad.DeudaConcesionesDolares = dto.DeudaConcesionesDolares;
+            entidad.CargoDesde = dto.CargoDesde;
 
             await _context.SaveChangesAsync();
 

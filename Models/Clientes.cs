@@ -49,7 +49,7 @@ namespace BackendFormatos.Models
         public string? Distrito { get; set; }
         public string? CodigoUnico { get; set; }
         public int? CantidadConcesiones { get; set; }
-        public decimal? DeusaConcesionesDolares { get; set; }
+        public decimal? DeudaConcesionesDolares { get; set; }
         public string? Banco { get; set; }
         public string? NroCuentaCorriente { get; set; }
         public string? CCI { get; set; }
