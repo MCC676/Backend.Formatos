@@ -12,6 +12,7 @@
         public string? Fecha { get; set; }
         public string? FechaExpiracion { get; set; }
         public string? NroFactura { get; set; }
+        public string? SerieFactura { get; set; }
         public string? Placa { get; set; }
 
         // placeholders opcionales que ya mandas
